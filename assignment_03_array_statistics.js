@@ -43,4 +43,77 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require("readline-sync");
+
+function calculateSum(numbers) {
+	let sum = 0;
+
+	for (let i = 0; i < numbers.length; i++) {
+		sum += numbers[i];
+	}
+
+	return sum;
+}
+
+function calculateAverage(numbers) {
+	return calculateSum(numbers) / numbers.length;
+}
+
+function findMaximum(numbers) {
+	let maximum = numbers[0];
+
+	for (let i = 1; i < numbers.length; i++) {
+		if (numbers[i] > maximum) {
+			maximum = numbers[i];
+		}
+	}
+
+	return maximum;
+}
+
+function findMinimum(numbers) {
+	let minimum = numbers[0];
+
+	for (let i = 1; i < numbers.length; i++) {
+		if (numbers[i] < minimum) {
+			minimum = numbers[i];
+		}
+	}
+
+	return minimum;
+}
+
+function main() {
+	const count = readlineSync.questionInt("How many numbers? ");
+
+	if (count <= 0) {
+		console.log("Error: Number of values must be positive.");
+		return;
+	}
+
+	const numbers = [];
+
+	for (let i = 0; i < count; i++) {
+		numbers.push(readlineSync.questionFloat(`Enter number ${i + 1}: `));
+	}
+
+	console.log("\nResults:");
+	console.log(`Sum:     ${calculateSum(numbers)}`);
+	console.log(`Average: ${calculateAverage(numbers)}`);
+	console.log(`Maximum: ${findMaximum(numbers)}`);
+	console.log(`Minimum: ${findMinimum(numbers)}`);
+}
+
+if (require.main === module) {
+	main();
+}
+
+module.exports = {
+	calculateSum,
+	calculateAverage,
+	findMaximum,
+	findMinimum,
+	main,
+};
+
 

@@ -59,4 +59,65 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require('readline-sync');
+
+function isPositiveInteger(number) {
+	return Number.isInteger(number) && number > 0;
+}
+
+function printMultiplicationTable(number) {
+	console.log(`Multiplication Table for ${number}:`);
+
+	for (let multiplier = 1; multiplier <= 12; multiplier++) {
+		const product = number * multiplier;
+		console.log(`${number}  x  ${String(multiplier).padStart(2)}  =  ${product}`);
+	}
+}
+
+function printTablesUpTo(number) {
+	for (let tableNumber = 1; tableNumber <= number; tableNumber++) {
+		printMultiplicationTable(tableNumber);
+
+		if (tableNumber < number) {
+			console.log('---------------------------');
+		}
+	}
+}
+
+function main() {
+	const singleTableNumber = readlineSync.questionInt(
+		'Enter a number for the single table: '
+	);
+
+	if (!isPositiveInteger(singleTableNumber)) {
+		console.log('Error: Number must be a positive integer.');
+		return;
+	}
+
+	printMultiplicationTable(singleTableNumber);
+
+	const tableLimit = readlineSync.questionInt(
+		'Enter N for tables from 1 to N: '
+	);
+
+	if (!isPositiveInteger(tableLimit)) {
+		console.log('Error: N must be a positive integer.');
+		return;
+	}
+
+	console.log('\nTables from 1 to N:');
+	printTablesUpTo(tableLimit);
+}
+
+if (require.main === module) {
+	main();
+}
+
+module.exports = {
+	isPositiveInteger,
+	printMultiplicationTable,
+	printTablesUpTo,
+	main,
+};
+
 
